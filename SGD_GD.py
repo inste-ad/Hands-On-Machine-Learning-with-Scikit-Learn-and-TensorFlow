@@ -23,8 +23,7 @@ print(theta)
 
 n_epochs = 50
 t0, t1 = 5, 50 # learning schedule hyperparameters
-def learning_schedule(t):
-    return t0 / (t + t1)g'i
+
 
 theta = np.random.randn(2,1) # random initialization
 for epoch in range(n_epochs):
