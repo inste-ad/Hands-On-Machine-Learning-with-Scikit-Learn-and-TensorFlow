@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 m = 100
 X = 6 * np.random.rand(m, 1) - 3
-X.sort()
+
 y = 0.5 * X**2 + X + 2 + np.random.randn(m, 1)
 
 plt.scatter(X,y)
@@ -32,3 +32,6 @@ lin_reg.intercept_, lin_reg.coef_
 y_pre = lin_reg.predict(X_poly)
 plt.plot(X, y_pre)
 
+#%%
+X.sort()
+X
