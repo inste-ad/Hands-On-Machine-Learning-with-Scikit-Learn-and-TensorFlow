@@ -18,7 +18,7 @@ for iteration in range(n_iterations):
     gradients = 2/m * X_b.T.dot(X_b.dot(theta) - y)
     theta = theta - eta * gradients
 print(theta)
-#######
+########
 ######随机梯度下降
 
 n_epochs = 50
