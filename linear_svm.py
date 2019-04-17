@@ -9,6 +9,8 @@ from sklearn.preprocessing import StandardScaler
 # ridge regression 和 svm 都是对数据的scale 很敏感的。StandardScaler 方法非常实用。
 # 关于StandardScaler 可以另外写个笔记做一下比较。
 # svm 用超参数C对margin进行控制，越小的C 越包容错误，越不容易over-fitting
+# 对于现行可分的数据，我们直接使用linearSVC函数
+# 也可以使用SVC(kernel="linear", C=1) 
 #%%
 iris = datasets.load_iris()
 X = iris["data"][:, (2, 3)] # petal length, petal width
