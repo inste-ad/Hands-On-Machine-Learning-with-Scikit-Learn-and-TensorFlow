@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 m = 100
 X = 6 * np.random.rand(m, 1) - 3
-X = np.sort(X, axis = 0)
+X = np.sort(X, axis = 0) #这里的排序因为是列排序，所以用np.sort，写axis 参数。 也可以是用 X.sort(axis = 0)
 y = 0.5 * X**2 + X + 2 + np.random.randn(m, 1)
 
 plt.scatter(X,y)
