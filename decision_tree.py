@@ -27,3 +27,7 @@ class_names=iris.target_names,
 rounded=True,
 filled=True
 )
+
+#%%[markdown]
+# 决策树非常容易overfiting。 对有参数的模型来说，对参数进行限制可以降低过拟合的风险，而决策树属于无参数模型。是由max_depth最大树深度这个超参数控制的。
+# 其他参数诸如min_samples_split，min_samples_leaf，min_samples_leaf等都可以起到一定的作用
