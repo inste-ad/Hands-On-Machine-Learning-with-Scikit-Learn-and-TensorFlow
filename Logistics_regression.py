@@ -19,7 +19,8 @@ X_new = np.linspace(0, 3, 1000).reshape(-1, 1)
 y_proba = log_reg.predict_proba(X_new)
 plt.plot(X_new, y_proba[:, 1], "g-", label="Iris-Virginica")
 plt.plot(X_new, y_proba[:, 0], "b--", label="Not Iris-Virginica")
-plt.scatter(X, y)
+plt.scatter(X[y==0], y[y==0], "bs")
+plt.scatter(X[y==1], y[y==1], "g^")
 
 #%% [markdown]
 ## Softmax Regression
