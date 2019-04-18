@@ -100,3 +100,18 @@ tree_clf = DecisionTreeClassifier(random_state=42)
 bag_clf = BaggingClassifier(
     DecisionTreeClassifier(), n_estimators=500,
     bootstrap=True, n_jobs=-1, oob_score=True)
+bag_clf.fit(X_train, y_train)
+bag_clf.oob_score_
+
+
+#%%[markdown]
+## Random Forest
+# 随机森林就是决策树的bagging版本。在skit-learn中有针对决策树优化的随机森林类，不用像上面那样用 BaggingClassifier 去嵌套decision tree。
+#%%
+from sklearn.ensemble import RandomForestClassifier
+rnd_clf = RandomForestClassifier(n_estimators=500, max_leaf_nodes=16, n_jobs=-1)
+rnd_clf.fit(X_train, y_train)
+y_pred_rf = rnd_clf.predict(X_test)
+
+#%%[markdown]
+# 随机森林也可以拿来用作标志feature重要性的工具。在single decision tree中，feature越重要，越可能靠近root。在随机森林中，根据feature的平均深度即可将feature进行排序。rnd_clf.feature_importances_可以使用
