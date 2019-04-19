@@ -8,8 +8,7 @@ X = iris.data[:, 2:] # petal length and width
 y = iris.target
 tree_clf = DecisionTreeClassifier(max_depth=2)
 tree_clf.fit(X, y)
-tree_clf = DecisionTreeClassifier(max_depth=2)
-tree_clf.fit(X, y)
+
 #%% [markdown]
 # 可以用export graphviz函数对
 # **因为不了ipython怎么设置运行文件的，储存文件的路径有一定的问题。所以使用chdir函数进行改变。 os.path.join是拼接文件名**
