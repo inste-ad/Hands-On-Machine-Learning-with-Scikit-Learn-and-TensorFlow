@@ -1,5 +1,26 @@
 #%%
 import numpy as np 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import os
+mpl.rc('axes', labelsize=14)
+mpl.rc('xtick', labelsize=12)
+mpl.rc('ytick', labelsize=12)
+
+# Where to save the figures
+PROJECT_ROOT_DIR = "."
+CHAPTER_ID = "ensembles"
+
+def image_path(fig_id=''):
+    return os.path.join(PROJECT_ROOT_DIR, "images", CHAPTER_ID, fig_id)
+
+def save_fig(fig_id, tight_layout=True):
+    print("Saving figure", fig_id)
+    if tight_layout:
+        plt.tight_layout()
+    if not os.path.exists(image_path()):
+        os.makedirs(image_path())	
+    plt.savefig(image_path(fig_id) + ".png", format='png', dpi=300)
 np.random.seed(42)
 X = np.random.rand(100, 1) -0.5
 y = 3*X[:,0]**2 + 0.05*np.random.rand(100)
@@ -66,4 +87,30 @@ plt.ylabel("$y$", fontsize=16, rotation=0)
 
 
 plt.show()
+#%%
+
+#%%
+# 上面用残差的过程就是使用gradient boost的方法。也可以扩展到其他不是均方差的loss function
+from sklearn.ensemble import GradientBoostingRegressor
+
+gbrt = GradientBoostingRegressor(max_depth=2, n_estimators=3, learning_rate=1.0, random_state=42)
+gbrt.fit(X, y)
+
+gbrt_slow = GradientBoostingRegressor(max_depth=2, n_estimators=200, learning_rate=0.1, random_state=42)
+gbrt_slow.fit(X, y)
+
+plt.figure(figsize =(11,4))
+
+plt.subplot(121)
+plot_predictions([gbrt], X, y, axes=[-0.5, 0.5, -0.1, 0.8], label="Ensemble predictions")
+plt.title("learning_rate={}, n_estimators={}".format(gbrt.learning_rate, gbrt.n_estimators), fontsize=14)
+
+plt.subplot(122)
+plot_predictions([gbrt_slow], X, y, axes=[-0.5, 0.5, -0.1, 0.8])
+plt.title("learning_rate={}, n_estimators={}".format(gbrt_slow.learning_rate, gbrt_slow.n_estimators), fontsize=14)
+
+
+save_fig("gbrt_learning_rate_plot")
+plt.show()
+
 #%%

@@ -70,7 +70,8 @@ def plot_decision_boundary(clf, X, y, axes=[-1.5, 2.5, -1, 1.5], alpha=0.5, cont
     plt.ylabel(r"$x_2$", fontsize=18, rotation=0)
 #%%
 #plt.plot(X[y==0,0],X[y==0,1],"g.")
-plt.plot(X[y==1,0], X[y==1,1],"r.")
+#plt.plot(X[y==1,0], X[y==1,1],"r.")
 plot_decision_boundary(ada_clf, X, y)
 
 plt.show()
+
