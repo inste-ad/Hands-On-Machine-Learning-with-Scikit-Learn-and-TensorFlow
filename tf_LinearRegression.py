@@ -2,7 +2,7 @@
 import tensorflow as tf 
 import numpy as np
 from sklearn.datasets import fetch_california_housing
-import os
+import os 
 housing = fetch_california_housing()
 m, n = housing.data.shape
 housing_data_plus_bias = np.c_[np.ones((m, 1)), housing.data]
@@ -75,7 +75,7 @@ y = tf.placeholder(tf.float32, shape=(None, 1), name="y")
 batch_size = 100
 
 n_batches = int(np.ceil(m / batch_size))
-n_epochs = 101
+
 saver = tf.train.Saver()
 def fetch_batch(epoch, batch_index, batch_size):
     X_batch = housing_data_plus_bias[batch_index*batch_size:(batch_index+1)*batch_size,:]
@@ -91,8 +91,8 @@ with tf.Session() as sess:
             sess.run(training_op, feed_dict={X: X_batch, y: y_batch})
         if epoch%100 == 0:
             print ("Epoch:",epoch)
-            save_path = saver.save(sess, "./tmp_model/my_model.ckpt")
+            save_path = saver.save(sess, "./tmp_model/LinerRegression/my_model.ckpt")
     
     best_theta = theta.eval()
-    save_path = saver.save(sess, "./tmp/my_model_final.ckpt")
+    save_path = saver.save(sess, "./tmp_model/LinerRegression/my_model_final.ckpt")
    
