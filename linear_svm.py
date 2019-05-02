@@ -4,7 +4,9 @@ from sklearn import datasets
 from sklearn import svm
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-
+#
+# TODO    要重新看，问题很多
+#
 #%%[markdown]
 # ridge regression 和 svm 都是对数据的scale 很敏感的。StandardScaler 方法非常实用。
 # 关于StandardScaler 可以另外写个笔记做一下比较。
