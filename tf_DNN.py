@@ -91,6 +91,6 @@ with tf.Session() as sess:
 		acc_test = accuracy.eval(feed_dict={X: mnist.test.images,
 		y: mnist.test.labels})
 		print(epoch, "Train accuracy:", acc_train, "Test accuracy:", acc_test)
-	save_path = saver.save(sess, "./my_model_final.ckpt")
+	#save_path = saver.save(sess, "./my_model_final.ckpt")
 
 
