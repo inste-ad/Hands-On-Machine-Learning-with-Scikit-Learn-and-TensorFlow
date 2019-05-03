@@ -2,7 +2,7 @@
 import os
 import numpy as np
 import tensorflow as tf 
-
+import matplotlib.pyplot as plt
 
 n_inputs = 28*28 # MNIST 28*28 pixel
 n_hidden1 = 300
@@ -14,6 +14,7 @@ n_outputs = 10
 #%%
 X = tf.placeholder(tf.float32, shape=(None, n_inputs), name="X")
 y = tf.placeholder(tf.int64, shape=(None), name ="y" )
+# 由于y是分类标签，所以用int
 
 #%%
 def neuron_layer(X, n_neurons, name, activation=None):
@@ -76,9 +77,14 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets("./data/MNIST")
 
+saver = tf.train.Saver()
 init = tf.global_variables_initializer()
 n_epochs = 100
 batch_size = 50
+
+
+test = np.ones(n_epochs)
+train = np.ones(n_epochs)
 
 
 with tf.Session() as sess:
@@ -90,7 +96,22 @@ with tf.Session() as sess:
 		acc_train = accuracy.eval(feed_dict={X: X_batch, y: y_batch})
 		acc_test = accuracy.eval(feed_dict={X: mnist.test.images,
 		y: mnist.test.labels})
+		train[epoch] = acc_train
+		test[epoch] = acc_test
 		print(epoch, "Train accuracy:", acc_train, "Test accuracy:", acc_test)
+		
+	save_path = saver.save(sess, "./tmp_model/fully_connnected/my_model_final.ckpt")
 	#save_path = saver.save(sess, "./my_model_final.ckpt")
+plt.figure()
+plt.plot( range(n_epochs),train,"g")
+plt.plot( range(n_epochs),test,"r")
+plt.show()
 
-
+# 下面是要再次启用储存模型的代码
+""" 
+with tf.Session() as sess:
+	saver.restore(sess, "./my_model_final.ckpt")
+	X_new_scaled = [...] # some new images (scaled from 0 to 1)
+	Z = logits.eval(feed_dict={X: X_new_scaled})
+	y_pred = np.argmax(Z, axis=1)
+ """
